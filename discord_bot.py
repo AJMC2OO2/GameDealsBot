@@ -1,3 +1,4 @@
+import config
 import discord
 import asyncio
 import logging
@@ -9,7 +10,6 @@ from game_deal_manager import GameDealManager
 logging.basicConfig(level=logging.INFO)
 
 # TODO: persistent data, log to file
-
 
 class GratisClient(discord.Client):
 
@@ -42,7 +42,7 @@ class GratisClient(discord.Client):
 
         reddit = RedditScraper()
         manager = GameDealManager(reddit)
-        channel = self.get_channel("<DISCORD_CHANNEL_ID>")
+        channel = self.get_channel(config.DISCORD_CHANNEL_ID)
 
         while not self.is_closed():
             if self.__is_6am_or_6pm():
@@ -50,27 +50,24 @@ class GratisClient(discord.Client):
 
                 if new_free_deals:
                     embed = discord.Embed(
-                        title='Freebie Alert!',
-                        description='New deals with free stuff on [/r/GameDeals](https://www.reddit.com/r/GameDeals/)',
-                        color=0x2df228)
+                            title='Freebie Alert!',
+                            description='New deals with free stuff on [/r/GameDeals](https://www.reddit.com/r/GameDeals/)',
+                            color=0x2df228)
                     for deal in new_free_deals:
-                        embed.add_field(name=deal.title,
-                                        value=deal.url, inline=False)
+                        embed.add_field(name=deal.title, value=deal.url, inline=False)
                     await self.__send_deals(embed)
-
-                # Sleep for 10 hours and 55 minutes
-                await asyncio.sleep(10 * 60 * 60 + 55 * 60)
+                    
+                await asyncio.sleep(10 * 60 * 60 + 55 * 60) # Sleep for 10 hours and 55 minutes
             else:
                 await asyncio.sleep(1)
 
     def __is_6am_or_6pm(self):
         """Return true if current time is within the first minute of 6am or 6pm."""
         current_time = datetime.now()
-        return ((current_time.hour == 6) or (current_time.hour == 18)) and (current_time.minute == 00)
+        return ((current_time.hour == 6) or (current_time.hour == 21)) and (current_time.minute == 20)
 
     async def __send_deals(self, embed):
-        channels_to_send_to = [c for c in self.get_all_channels(
-        ) if c.type == discord.ChannelType.text and c.name == 'free-games']
+        channels_to_send_to = [c for c in self.get_all_channels() if c.type == discord.ChannelType.text and c.name == 'free-games']
 
         for channel in channels_to_send_to:
             if channel.permissions_for(channel.guild.me).send_messages:
@@ -81,8 +78,7 @@ class GratisClient(discord.Client):
 
 def main():
     client = GratisClient()
-    client.run("NzA2NDMzOTQzMjgwNDE4ODE3.Xq6NSw.4s5mF66q9eoK8mPUDPg-6yYT8-w")
-
+    client.run(config.DISCORD_TOKEN)
 
 if __name__ == '__main__':
     main()
