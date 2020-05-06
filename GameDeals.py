@@ -53,7 +53,7 @@ class GratisClient(discord.Client):
                         embed = discord.Embed(
                             title=deal.title[deal.title.find(" ")+1:len(x)],
                             description=deal.title[1:deal.title.find(" ") - 1],
-                            url=deal.url
+                            url=deal.url,
                             color=0x2df228
                         )
                         await self.__send_deals(embed)
