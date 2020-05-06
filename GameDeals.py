@@ -24,11 +24,11 @@ class GratisClient(discord.Client):
     async def on_message(self, message):
         if message.content in ['gd.info', 'gd.i']:
             description = 'Game Deals is a bot that helps you know the latest discounts on videogames you\'ll keep forever in your library!'
-            embed = discord.Embed(title='Bot Information', description=description, colour=0xa865e3) \
+            embed = discord.Embed(title='Bot Information', description=description, colour=0x2df228) \
                 .add_field(name='Developer', value='[<REDDIT_USERNAME>](https://github.com/AJMC2OO2)')
             await message.channel.send(embed=embed)
         elif message.content in ['gd.help', 'gd.h']:
-            embed = discord.Embed(title='Game Deals Commands', colour=0xa865e3) \
+            embed = discord.Embed(title='Game Deals Commands', colour=0x2df228) \
                 .add_field(name='gd.info', value='Display bot information.', inline=False) \
                 .add_field(name='gd.help', value='Display the commands menu.')
             await message.channel.send(embed=embed)
@@ -53,7 +53,7 @@ class GratisClient(discord.Client):
                         embed = discord.Embed(
                             title=deal.title[deal.title.find(" ")+1:len(x)],
                             description=deal.title[1:deal.title.find(" ") - 1],
-                            url=deal.url
+                            url=deal.url,
                             color=0x2df228
                         )
                         await self.__send_deals(embed)
