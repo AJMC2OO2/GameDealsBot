@@ -1,6 +1,6 @@
 # Game Deals
 
-This is a Discord bot based on Gratis by [Yu-Jo Tseng](https://yujotseng.com/) that scrapes the [r/GameDeals](https://www.reddit.com/r/GameDeals/) subreddit for free deals. It sends new deals to channels that contain "game-deals" within its name between 6 am and 6 pm.
+This is a Discord bot based on [Gratis](https://github.com/uro98/gratis) by [Yu-Jo Tseng](https://yujotseng.com/) that scrapes the [r/GameDeals](https://www.reddit.com/r/GameDeals/) subreddit for free deals. It sends new deals to channels that contain "game-deals" within its name between 6 am and 6 pm.
 
 ## Built With
 
