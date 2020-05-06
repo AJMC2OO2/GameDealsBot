@@ -1,5 +1,6 @@
 __pycache__/
 *.py[cod]
 config.py
+Template(GratisBot).py
 .idea/
 .vscode/
