@@ -1,6 +1,6 @@
 # Discord values (Game Deals) [Bot Discord]
 DISCORD_CHANNEL_ID = "<DISCORD_CHANNEL_ID>"
-DISCORD_TOKEN = "NzA2NDMzOTQzMjgwNDE4ODE3.Xq6NSw.4s5mF66q9eoK8mPUDPg-6yYT8-w"
+DISCORD_TOKEN = "NzA2NDMzOTQzMjgwNDE4ODE3.XrIG9w.dUUF_pZ_gl5LpJxJD-zcx8Pk-Hw"
 
 # Reddit values (Gratis) [Bot Reddit]
 REDDIT_CLIENT_ID = "PWzL26MwPoKw_g"
