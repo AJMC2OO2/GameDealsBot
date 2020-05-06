@@ -51,7 +51,7 @@ class GratisClient(discord.Client):
                 if new_free_deals:
                     for deal in new_free_deals:
                         embed = discord.Embed(
-                            title=deal.title[deal.title.find(" ")+1:len(x)],
+                            title=deal.title[deal.title.find(" ")+1:len(deal.title)],
                             description=deal.title[1:deal.title.find(" ") - 1],
                             url=deal.url,
                             color=0x2df228
