@@ -3,11 +3,14 @@ import discord
 import asyncio
 import logging
 import traceback
+from link_preview import link_preview
 from datetime import datetime
 from reddit_scraper import RedditScraper
 from game_deal_manager import GameDealManager
 
 logging.basicConfig(level=logging.INFO)
+
+preview_attributes = link_preview.generate_dict("")
 
 # TODO: persistent data, log to file
 
@@ -50,10 +53,13 @@ class GratisClient(discord.Client):
 
                 if new_free_deals:
                     for deal in new_free_deals:
+                        preview_attributes = link_preview.generate_dict(
+                            deal.url)  # Link preview
                         embed = discord.Embed(
                             title=deal.title[deal.title.find(" ")+1:len(x)],
                             description=deal.title[1:deal.title.find(" ") - 1],
                             url=deal.url,
+                            image=preview_attributes["image"],
                             color=0x2df228
                         )
                         await self.__send_deals(embed)
