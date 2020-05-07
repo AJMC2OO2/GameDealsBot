@@ -10,8 +10,6 @@ from game_deal_manager import GameDealManager
 
 logging.basicConfig(level=logging.INFO)
 
-preview_attributes = link_preview.generate_dict("")
-
 # TODO: persistent data, log to file
 
 
