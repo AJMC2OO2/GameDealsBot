@@ -72,7 +72,7 @@ class GratisClient(discord.Client):
         Return true if current time is within 12am or 12pm.
         """
         current_time = datetime.now()
-        return (current_time.hour >= 12) and (current_time.hour <= 24)
+        return (current_time.hour >= 12) and (current_time.hour <= 23)
 
     async def __send_deals(self, embed):
         channels_to_send_to = [c for c in self.get_all_channels(
