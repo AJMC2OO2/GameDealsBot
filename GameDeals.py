@@ -62,17 +62,17 @@ class GratisClient(discord.Client):
                         )
                         await self.__send_deals(embed)
 
-                # Sleep for 4 hours and 0 minutes
-                await asyncio.sleep(4 * 60 * 60)
+                # Sleep for 2 hours and 0 minutes
+                await asyncio.sleep(2 * 60 * 60)
             else:
                 await asyncio.sleep(1)
 
     def __between_12am_and_12pm(self):
         """
-        Return true if current time is within 6am or 6pm.
+        Return true if current time is within 12am or 12pm.
         """
         current_time = datetime.now()
-        return ((current_time.hour >= 12) and (current_time.hour <= 24)) and (current_time.minute == 0)
+        return (current_time.hour >= 12) and (current_time.hour <= 24)
 
     async def __send_deals(self, embed):
         channels_to_send_to = [c for c in self.get_all_channels(
