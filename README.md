@@ -6,6 +6,7 @@ This is a Discord Bot based on [Yu Jo Tseng](https://yujotseng.com/)'s bot [Grat
 
 * [PRAW](https://github.com/praw-dev/praw) - Python Reddit API Wrapper
 * [discord.py](https://github.com/Rapptz/discord.py) - Python Discord API Wrapper
+* [link_preview.py](https://github.com/aakash4525/py_link_preview) - Python element gatherer for link preview
 
 ## Author
 Adrián Mosquera C.
