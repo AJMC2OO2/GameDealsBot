@@ -54,11 +54,11 @@ class GratisClient(discord.Client):
                         preview_attributes = link_preview.generate_dict(
                             deal.url)  # Link preview
                         embed = discord.Embed(
-                            title=deal.title[deal.title.find(" ")+1:len(x)],
+                            title=deal.title[deal.title.find(" ")+1:len(deal.title)],
                             description=deal.title[1:deal.title.find(" ") - 1],
                             url=deal.url,
                             image=preview_attributes["image"],
-                            color=0x2df228
+                            color=0xa865e3
                         )
                         await self.__send_deals(embed)
 
