@@ -6,7 +6,7 @@ This is a Discord Bot based on [Yu Jo Tseng](https://yujotseng.com/)'s bot [Grat
 
 * [PRAW](https://github.com/praw-dev/praw) - Python Reddit API Wrapper
 * [discord.py](https://github.com/Rapptz/discord.py) - Python Discord API Wrapper
-* [link_preview.py](https://github.com/aakash4525/py_link_preview) - Python element gatherer for link preview
+* [Beautiful Soup 4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) - Python library for pulling data out of HTML/XML files
 
 ## Author
 Adrián Mosquera C.
