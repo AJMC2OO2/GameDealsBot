@@ -3,7 +3,7 @@ import discord
 import asyncio
 import logging
 import traceback
-from link_preview import link_preview
+from image_scraper import preview_image
 from datetime import datetime
 from reddit_scraper import RedditScraper
 from game_deal_manager import GameDealManager
@@ -54,16 +54,15 @@ class GratisClient(discord.Client):
                         preview_attributes = link_preview.generate_dict(
                             deal.url)  # Link preview
                         embed = discord.Embed(
-                            title=deal.title[deal.title.find(" ")+1:len(deal.title)],
+                            title=deal.title[deal.title.find(
+                                " ")+1:len(deal.title)],
                             description=deal.title[1:deal.title.find(" ") - 1],
                             url=deal.url,
-                            image=preview_attributes["image"],
+                            image=preview_image(deal.url),
                             color=0xa865e3
                         )
                         await self.__send_deals(embed)
-
-                # Sleep for 2 hours and 0 minutes
-                await asyncio.sleep(2 * 60 * 60)
+                        await asyncio.sleep(5*60)
             else:
                 await asyncio.sleep(1)
 
