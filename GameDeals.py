@@ -51,8 +51,6 @@ class GratisClient(discord.Client):
 
                 if new_free_deals:
                     for deal in new_free_deals:
-                        preview_attributes = link_preview.generate_dict(
-                            deal.url)  # Link preview
                         embed = discord.Embed(
                             title=deal.title[deal.title.find(
                                 " ")+1:len(deal.title)],
