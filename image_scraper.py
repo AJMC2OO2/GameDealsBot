@@ -26,7 +26,7 @@ class ImagePreview:
             return image.get('href')
             break
 
-    def preview_image(url):
+    def preview_image(self,url):
         source = driver.get(url)
         html = driver.page_source
         code = BeautifulSoup(source.text, "html.parser")
