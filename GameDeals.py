@@ -3,7 +3,7 @@ import discord
 import asyncio
 import logging
 import traceback
-from image_scraper import ImagePreview
+from image_scraper import preview_image
 from datetime import datetime
 from reddit_scraper import RedditScraper
 from game_deal_manager import GameDealManager
@@ -47,7 +47,7 @@ class GratisClient(discord.Client):
         channel = self.get_channel(config.DISCORD_CHANNEL_ID)
 
         while not self.is_closed():
-            if self.__between_6am_and_12pm():
+            if self.__between_12am_and_12pm():
                 new_free_deals = manager.find_deals()
 
                 if new_free_deals:
@@ -57,7 +57,7 @@ class GratisClient(discord.Client):
                                 " ")+1:len(deal.title)],
                             description=deal.title[1:deal.title.find(" ") - 1],
                             url=deal.url,
-                            image=img_prev.preview_image(deal.url),
+                            image=preview_image(deal.url),
                             color=0xa865e3
                         )
                         await self.__send_deals(embed)
@@ -65,12 +65,12 @@ class GratisClient(discord.Client):
             else:
                 await asyncio.sleep(1)
 
-    def __between_6am_and_12pm(self):
+    def __between_12am_and_12pm(self):
         """
-        Return true if current time is within 6am and 12pm.
+        Return true if current time is within 12am or 12pm.
         """
         current_time = datetime.now()
-        return (current_time.hour >= 6) and (current_time.hour <= 23)
+        return (current_time.hour >= 12) and (current_time.hour <= 23)
 
     async def __send_deals(self, embed):
         channels_to_send_to = [c for c in self.get_all_channels(
