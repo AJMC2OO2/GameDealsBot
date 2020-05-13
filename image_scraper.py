@@ -28,7 +28,7 @@ class ImagePreview:
         
         source = driver.get(url)
         html = driver.page_source
-        code = BeautifulSoup(source.text, "html.parser")
+        code = BeautifulSoup(html.text, "html.parser")
         if ogimage(url, code) != None:
             return ogimage(url, code)
         elif imagesrc(url, code) != None:
