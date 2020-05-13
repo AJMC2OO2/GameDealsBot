@@ -7,6 +7,7 @@ This is a Discord Bot based on [Yu Jo Tseng](https://yujotseng.com/)'s bot [Grat
 * [PRAW](https://github.com/praw-dev/praw) - Python Reddit API Wrapper
 * [discord.py](https://github.com/Rapptz/discord.py) - Python Discord API Wrapper
 * [Beautiful Soup 4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) - Python library for pulling data out of HTML/XML files
+* [Selenium](https://github.com/baijum/selenium-python) - Python API to access Selenium WebDrivers like Chrome
 
 ## Author
 Adrián Mosquera C.
