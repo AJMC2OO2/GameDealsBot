@@ -43,7 +43,6 @@ class GratisClient(discord.Client):
 
         reddit = RedditScraper()
         manager = GameDealManager(reddit)
-        img_prev = ImagePreview()
         channel = self.get_channel(config.DISCORD_CHANNEL_ID)
 
         while not self.is_closed():
