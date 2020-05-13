@@ -26,7 +26,8 @@ class ImagePreview:
         driver = webdriver.Chrome(executable_path=os.environ.get(
             "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
         
-        source = driver.get(url)
+        driver.get(url)
+        
         html = driver.page_source
         code = BeautifulSoup(html.text, "html.parser")
         if ogimage(url, code) != None:
