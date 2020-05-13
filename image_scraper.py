@@ -5,9 +5,6 @@ from selenium import webdriver
 
 
 class ImagePreview:
-    def __init__(self):
-        pass
-
     def ogimage(url, code):
         og_image = html.find_all(property="og:image")
         for image in og_image:
@@ -20,7 +17,7 @@ class ImagePreview:
             return image.get('href')
             break
 
-    def preview_image(self,url):
+    def preview_image(url):
         chrome_options = webdriver.ChromeOptions()
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         chrome_options.add_argument("--headless")
@@ -37,4 +34,4 @@ class ImagePreview:
         elif imagesrc(url, code) != None:
             return imagesrc(url, code)
         else:
-            return None
+            return ""
