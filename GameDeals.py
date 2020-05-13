@@ -47,7 +47,7 @@ class GratisClient(discord.Client):
         channel = self.get_channel(config.DISCORD_CHANNEL_ID)
 
         while not self.is_closed():
-            if self.__between_12am_and_12pm():
+            if self.__between_6am_and_12pm():
                 new_free_deals = manager.find_deals()
 
                 if new_free_deals:
@@ -65,12 +65,12 @@ class GratisClient(discord.Client):
             else:
                 await asyncio.sleep(1)
 
-    def __between_12am_and_12pm(self):
+    def __between_6am_and_12pm(self):
         """
-        Return true if current time is within 12am or 12pm.
+        Return true if current time is within 6am and 12pm.
         """
         current_time = datetime.now()
-        return (current_time.hour >= 12) and (current_time.hour <= 23)
+        return (current_time.hour >= 6) and (current_time.hour <= 23)
 
     async def __send_deals(self, embed):
         channels_to_send_to = [c for c in self.get_all_channels(
