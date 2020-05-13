@@ -1,27 +1,38 @@
 import requests
+import os
 from bs4 import BeautifulSoup
+from selenium import webdriver
 
 
-def ogimage(url, html):
-    og_image = html.find_all(property="og:image")
-    for image in og_image:
-        return image.get('content')
+class ImagePreview:
+    def __init__(self):
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--no-sandbox")
+        driver = webdriver.Chrome(executable_path=os.environ.get(
+            "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
+    def ogimage(url, code):
+        og_image = html.find_all(property="og:image")
+        for image in og_image:
+            return image.get('content')
+            break
 
-def imagesrc(url, html):
-    image_src = html.find_all(rel="image_src")
-    for image in image_src:
-        return image.get('href')
+    def imagesrc(url, code):
+        image_src = html.find_all(rel="image_src")
+        for image in image_src:
+            return image.get('href')
+            break
 
-
-def preview_image(url):
-    session = requests.Session()
-    cookies = session.cookies.get_dict()
-    source = session.get(url, cookies=cookies)
-    html = BeautifulSoup(source.text, "html.parser")
-    if ogimage(url, html) == None and imagesrc(url, html) == None:
-        return None
-    elif ogimage(url, html) == None:
-        return imagesrc(url, html)
-    else:
-        return ogimage(url, html)
+    def preview_image(url):
+        source = driver.get(url)
+        html = driver.page_source
+        code = BeautifulSoup(source.text, "html.parser")
+        if ogimage(url, code) != None:
+            return ogimage(url, code)
+        elif imagesrc(url, code) != None:
+            return imagesrc(url, code)
+        else:
+            return None

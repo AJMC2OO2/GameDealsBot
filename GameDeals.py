@@ -3,7 +3,7 @@ import discord
 import asyncio
 import logging
 import traceback
-from image_scraper import preview_image
+from image_scraper import ImagePreview
 from datetime import datetime
 from reddit_scraper import RedditScraper
 from game_deal_manager import GameDealManager
@@ -43,6 +43,7 @@ class GratisClient(discord.Client):
 
         reddit = RedditScraper()
         manager = GameDealManager(reddit)
+        img_prev = ImagePreview()
         channel = self.get_channel(config.DISCORD_CHANNEL_ID)
 
         while not self.is_closed():
@@ -56,7 +57,7 @@ class GratisClient(discord.Client):
                                 " ")+1:len(deal.title)],
                             description=deal.title[1:deal.title.find(" ") - 1],
                             url=deal.url,
-                            image=preview_image(deal.url),
+                            image=img_prev.preview_image(deal.url),
                             color=0xa865e3
                         )
                         await self.__send_deals(embed)
