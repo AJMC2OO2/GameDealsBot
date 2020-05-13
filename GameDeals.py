@@ -57,7 +57,7 @@ class GratisClient(discord.Client):
                                 " ")+1:len(deal.title)],
                             description=deal.title[1:deal.title.find(" ") - 1],
                             url=deal.url,
-                            image=img_prev.preview_image(str(deal.url)),
+                            image=img_prev.preview_image(deal.url),
                             color=0xa865e3
                         )
                         await self.__send_deals(embed)
