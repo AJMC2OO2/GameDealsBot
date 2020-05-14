@@ -5,14 +5,14 @@ from selenium import webdriver
 
 
 def ogimage(url, html):
-    og_image = code.find_all(property="og:image")
+    og_image = html.find_all(property="og:image")
     for image in og_image:
         return image.get('content')
         break
 
 
 def imagesrc(url, html):
-    image_src = code.find_all(rel="image_src")
+    image_src = html.find_all(rel="image_src")
     for image in image_src:
         return image.get('href')
         break
