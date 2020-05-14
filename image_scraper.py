@@ -28,10 +28,10 @@ def preview_image(url):
         "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
     driver.get(url)
-    html = driver.page_source
-    if ogimage(url, html) != None:
-        return ogimage(url, html)
-    elif imagesrc(url, html) != None:
-        return imagesrc(url, html)
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    if ogimage(url, soup) != None:
+        return ogimage(url, soup)
+    elif imagesrc(url, soup) != None:
+        return imagesrc(url, soup)
     else:
         return ""
