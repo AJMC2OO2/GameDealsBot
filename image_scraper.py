@@ -4,14 +4,14 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 
 
-def ogimage(url, code):
+def ogimage(url, html):
     og_image = code.find_all(property="og:image")
     for image in og_image:
         return image.get('content')
         break
 
 
-def imagesrc(url, code):
+def imagesrc(url, html):
     image_src = code.find_all(rel="image_src")
     for image in image_src:
         return image.get('href')
@@ -28,12 +28,10 @@ def preview_image(url):
         "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
     driver.get(url)
-
     html = driver.page_source
-    code = BeautifulSoup(html.text, "html.parser")
-    if ogimage(url, code) != None:
-        return ogimage(url, code)
-    elif imagesrc(url, code) != None:
-        return imagesrc(url, code)
+    if ogimage(url, html) != None:
+        return ogimage(url, html)
+    elif imagesrc(url, html) != None:
+        return imagesrc(url, html)
     else:
         return ""
