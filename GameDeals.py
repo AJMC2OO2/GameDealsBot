@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO)
 # TODO: persistent data, log to file
 
 
-class GratisClient(discord.Client):
+class GameDealsClient(discord.Client):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -53,14 +53,14 @@ class GratisClient(discord.Client):
                     for deal in new_free_deals:
                         embed = discord.Embed(
                             title=deal.title[deal.title.find(
-                                " ")+1:len(deal.title)],
-                            description=deal.title[1:deal.title.find(" ") - 1],
+                                "]")+2:len(deal.title)],
+                            description=deal.title[1:deal.title.find("]")],
                             url=deal.url,
-                            image=preview_image(deal.url),
                             color=0xa865e3
                         )
+                        embed.set_image(preview_image(deal.url))
                         await self.__send_deals(embed)
-                        await asyncio.sleep(5*60)
+                await asyncio.sleep(4 * 60 * 60)
             else:
                 await asyncio.sleep(1)
 
@@ -83,7 +83,7 @@ class GratisClient(discord.Client):
 
 
 def main():
-    client = GratisClient()
+    client = GameDealsClient()
     client.run(config.DISCORD_TOKEN)
 
 
