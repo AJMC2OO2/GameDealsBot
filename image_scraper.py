@@ -8,14 +8,12 @@ def ogimage(url, html):
     og_image = html.find_all(property="og:image")
     for image in og_image:
         return image.get('content')
-        break
 
 
 def imagesrc(url, html):
     image_src = html.find_all(rel="image_src")
     for image in image_src:
         return image.get('href')
-        break
 
 
 def preview_image(url):
