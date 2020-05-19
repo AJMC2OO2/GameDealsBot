@@ -60,7 +60,9 @@ class GameDealsClient(discord.Client):
                         )
                         embed.set_image(url=preview_image(deal.url))
                         await self.__send_deals(embed)
-                await asyncio.sleep(4 * 60 * 60)
+                        await asyncio.sleep(10*60)
+                    new_free_deals.clear()
+                await asyncio.sleep(6 * 60 * 60)
             else:
                 await asyncio.sleep(1)
 
