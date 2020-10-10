@@ -54,7 +54,7 @@ class GameDealsClient(discord.Client):
                     time = datetime.fromtimestamp(deal.created_utc)
                     diff = datetime.utcnow() - time
                     diff = diff.total_seconds()
-                    if diff < 5*60:
+                    if diff < 5 * 60:
                         new_free_deals.append(deal)
                     else:
                         continue
@@ -70,6 +70,7 @@ class GameDealsClient(discord.Client):
                     embed.set_image(url=preview_image(deal.url))
                     await self.__send_deals(embed)
                     new_free_deals.remove(deal)
+                    await asyncio.sleep(10 * 60)
 
     async def __send_deals(self, embed):
         channels_to_send_to = [c for c in self.get_all_channels(
