@@ -46,32 +46,30 @@ class GameDealsClient(discord.Client):
         channel = self.get_channel(config.DISCORD_CHANNEL_ID)
 
         while not self.is_closed():
-            if self.__between_12am_and_12pm():
-                new_free_deals = manager.find_deals()
+            free_deals = manager.find_deals()
+            new_free_deals = []
 
-                if new_free_deals:
-                    for deal in new_free_deals:
-                        embed = discord.Embed(
-                            title=deal.title[deal.title.find(
-                                "]")+2:len(deal.title)],
-                            description=deal.title[1:deal.title.find("]")],
-                            url=deal.url,
-                            color=0xa865e3
-                        )
-                        embed.set_image(url=preview_image(deal.url))
-                        await self.__send_deals(embed)
-                        await asyncio.sleep(10*60)
-                    new_free_deals.clear()
-                await asyncio.sleep(6 * 60 * 60)
-            else:
-                await asyncio.sleep(1)
+            if free_deals:
+                for deal in free_deals:
+                    time = datetime.fromtimestamp(submission.created_utc)
+                    diff = datetime.utcnow() - time
+                    diff = diff.total_seconds()
+                    if diff < 5*60:
+                        new_free_deals.append(deal)
+                    else:
+                        continue
 
-    def __between_12am_and_12pm(self):
-        """
-        Return true if current time is within 12am or 12pm.
-        """
-        current_time = datetime.now()
-        return (current_time.hour >= 12) and (current_time.hour <= 23)
+                for deal in new_free_deals:
+                    embed = discord.Embed(
+                        title=deal.title[deal.title.find(
+                            "]")+2:len(deal.title)],
+                        description=deal.title[1:deal.title.find("]")],
+                        url=deal.url,
+                        color=0xa865e3
+                    )
+                    embed.set_image(url=preview_image(deal.url))
+                    await self.__send_deals(embed)
+                    new_free_deals.remove(deal)
 
     async def __send_deals(self, embed):
         channels_to_send_to = [c for c in self.get_all_channels(
