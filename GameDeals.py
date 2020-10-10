@@ -1,4 +1,3 @@
-import config
 import discord
 import asyncio
 import logging
@@ -43,7 +42,7 @@ class GameDealsClient(discord.Client):
 
         reddit = RedditScraper()
         manager = GameDealManager(reddit)
-        channel = self.get_channel(config.DISCORD_CHANNEL_ID)
+        channel = self.get_channel(DISCORD_CHANNEL_ID)
 
         while not self.is_closed():
             free_deals = manager.find_deals()
@@ -86,7 +85,7 @@ class GameDealsClient(discord.Client):
 
 def main():
     client = GameDealsClient()
-    client.run(config.DISCORD_TOKEN)
+    client.run(DISCORD_TOKEN)
 
 
 if __name__ == '__main__':
