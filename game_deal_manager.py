@@ -6,7 +6,7 @@ from reddit_scraper import RedditScraper
 class GameDealManager:
 
     num_of_deals = 30
-    
+
     def __init__(self, reddit):
         self.__reddit = reddit
         self.__seen_deal_ids = deque(maxlen=GameDealManager.num_of_deals)
@@ -21,7 +21,7 @@ class GameDealManager:
     def __process_deal(self, deal, new_free_deals):
         """Store the deal if it has not been seen before and is free."""
         if deal.id not in self.__seen_deal_ids and self.__is_free_deal(deal):
-        #if is_free_deal(deal):
+            # if is_free_deal(deal):
             new_free_deals.append(deal)
         self.__seen_deal_ids.append(deal.id)
 

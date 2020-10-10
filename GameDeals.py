@@ -1,3 +1,4 @@
+import config
 import discord
 import asyncio
 import logging
@@ -42,7 +43,7 @@ class GameDealsClient(discord.Client):
 
         reddit = RedditScraper()
         manager = GameDealManager(reddit)
-        channel = self.get_channel(DISCORD_CHANNEL_ID)
+        channel = self.get_channel(config.DISCORD_CHANNEL_ID)
 
         while not self.is_closed():
             free_deals = manager.find_deals()
@@ -68,7 +69,7 @@ class GameDealsClient(discord.Client):
                     )
                     embed.set_image(url=preview_image(deal.url))
                     await self.__send_deals(embed)
-                    await asyncio.sleep(10 * 60)
+                    await asyncio.sleep(4 * 60 + 45)
 
                 new_free_deals.clear()
 
@@ -85,7 +86,7 @@ class GameDealsClient(discord.Client):
 
 def main():
     client = GameDealsClient()
-    client.run(DISCORD_TOKEN)
+    client.run(config.DISCORD_TOKEN)
 
 
 if __name__ == '__main__':
