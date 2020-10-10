@@ -51,7 +51,7 @@ class GameDealsClient(discord.Client):
 
             if free_deals:
                 for deal in free_deals:
-                    time = datetime.fromtimestamp(submission.created_utc)
+                    time = datetime.fromtimestamp(deal.created_utc)
                     diff = datetime.utcnow() - time
                     diff = diff.total_seconds()
                     if diff < 5*60:
