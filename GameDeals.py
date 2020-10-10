@@ -69,8 +69,9 @@ class GameDealsClient(discord.Client):
                     )
                     embed.set_image(url=preview_image(deal.url))
                     await self.__send_deals(embed)
-                    new_free_deals.remove(deal)
                     await asyncio.sleep(10 * 60)
+
+                new_free_deals.clear()
 
     async def __send_deals(self, embed):
         channels_to_send_to = [c for c in self.get_all_channels(
