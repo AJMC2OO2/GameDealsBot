@@ -9,7 +9,7 @@ def ogimage(url, html):
     og_image = html.find_all(property="og:image")
     for image in og_image:
         return image.get('content')
-    return 
+    return
 
 
 def imagesrc(url, html):
@@ -22,11 +22,13 @@ def imagesrc(url, html):
 def preview_image(url):
     """Heroku configurations for Chrome webdriver"""
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get(GOOGLE_CHROME_BIN)
+    chrome_options.binary_location = os.environ.get(
+        "/app/.chromedriver/bin/chromedriver")
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
-    driver = webdriver.Chrome(executable_path=os.environ.get(CHROMEDRIVER_PATH), chrome_options=chrome_options)
+    driver = webdriver.Chrome(executable_path=os.environ.get(
+        "/app/.apt/usr/bin/google-chrome"), chrome_options=chrome_options)
 
     """Returns the image in the website (og:image -> image_src -> Nothing)"""
     driver.get(url)
